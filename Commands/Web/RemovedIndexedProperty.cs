@@ -1,15 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Management.Automation;
+﻿using System.Management.Automation;
 using Microsoft.SharePoint.Client;
-using OfficeDevPnP.PowerShell.CmdletHelpAttributes;
+using SharePointPnP.PowerShell.CmdletHelpAttributes;
 
-namespace OfficeDevPnP.PowerShell.Commands
+namespace SharePointPnP.PowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Remove, "SPOIndexedProperty")]
-    [CmdletHelp("Removes a key from propertybag to be indexed by search. The key and it's value retain in the propertybag, however it will not be indexed anymore.", Category = "Webs")]
-    public class RemovedIndexedProperty : SPOWebCmdlet
+    [Cmdlet(VerbsCommon.Remove, "PnPIndexedProperty")]
+    [CmdletHelp("Removes a key from propertybag to be indexed by search. The key and it's value remain in the propertybag, however it will not be indexed anymore.",
+        Category = CmdletHelpCategory.Webs)]
+    [CmdletExample(
+        Code = @"PS:> Remove-PnPIndexedProperty -key ""MyIndexProperty""", 
+        Remarks = @"Removes the Indexed property ""MyIndexProperty"" from the current web", 
+        SortOrder = 1)]
+    public class RemovedIndexedProperty : PnPWebCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0)]
+        [Parameter(Mandatory = true, Position = 0, HelpMessage = @"Key of the property bag value to be removed from indexing")]
         public string Key;
 
         protected override void ExecuteCmdlet()
